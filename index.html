@@ -20,14 +20,6 @@ var isWebKitAudio = (typeof (webkitAudioContext) !== "undefined");
 var audio_context = (isWebKitAudio) ? new webkitAudioContext() : new AudioContext();
 var noise_dsp = null;
 
-<audio src="musictrack.mp3"></audio>
-
-// get the audio element
-const audioElement = document.querySelector('audio');
-
-// pass it into the audio context
-const track = audioContext.createMediaElementSource(audioElement);
-
 // Slider handler to change the 'noise' volume
 function changeVolume(event)
 {
@@ -48,7 +40,7 @@ function startnoise()
                             // Print path to be used with 'setParamValue'
                             console.log(noise_dsp.getParams());
                             // Connect it to output as a regular WebAudio node
-                            track.connect(noise_dsp).connect(audio_context.destination);
+                            noise_dsp.connect(audio_context.destination);
                       });
 }
 
@@ -82,3 +74,4 @@ window.addEventListener("mousedown", () => {
 
 </body>
 </html>
+
